@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Sign up{% endblock %}
+
+{% block content %}
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for msg in messages %}
+                <p>{{msg}}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    
+<form action="#" method="POST">
+    <p>Your verification code:</p>
+    <input type="numbers" name="ver" placeholder="Enter password:" value=""/>
+    <p><input type="submit" type="submit" /></p>
+</form>
+{% endblock %}
