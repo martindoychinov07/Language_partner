@@ -3,6 +3,7 @@ from datetime import timedelta
 from flask_sqlalchemy import SQLAlchemy
 import hashlib
 from email_verification import *
+from notification import *
 
 
 app = Flask(__name__)
@@ -21,13 +22,17 @@ class users(db.Model):
 	language = db.Column(db.String(100))
 	password = db.Column(db.String(100))
 	status = db.Column(db.Integer)
+	invitations = db.Column(db.String(1000))
+	friends = db.Column(db.String(1000))
 
-	def __init__(self, name, email, language, password, status):
+	def __init__(self, name, email, language, password, status, invitations, friends):
 		self.name = name
 		self.email = email
 		self.language = language
 		self.password = password
 		self.status = status
+		self.invitations = invitations
+		self.friends = friends
 
 
 @app.route("/")
@@ -56,7 +61,7 @@ def signup():
 		else:
 			flash("Verification email was sent!")
 			send_email(email)
-			usr = users(user, email, language, hashed, 0)
+			usr = users(user, email, language, hashed, 0, "", "")
 			db.session.add(usr)
 			db.session.commit()
 			return redirect("verify")
@@ -69,6 +74,9 @@ def login():
 		user = request.form["user"]
 		email = request.form["email"]
 		password = request.form["password"]
+		session["user"] = user
+		session["email"] = email
+		session["password"] = password
 		found_user = users.query.filter_by(name = user).first()
 		
 		if type(found_user) != None:
@@ -162,14 +170,48 @@ def search():
 	return render_template("search.html")
 
 
-@app.route('/invitation')
+@app.route('/invite', methods=["POST", "GET"])
+def invite():
+	if request.method == "POST":
+		invited = request.form["user"]
+		found_user = users.query.filter_by(name = invited).first()
+		if found_user != None:
+			found_user.invitations = found_user.invitations + session["user"] + " " 
+			send_notification(found_user.email)
+			db.session.add(found_user)
+			db.session.commit()
+		else:
+			flash("There is no such user!")
+	return render_template("invite.html")
+
+
+@app.route("/invitation", methods = ["POST", "GET"])
 def invitation():
-	pass
+	user = session["user"]
+	found_user = users.query.filter_by(name = user).first()
+	flash("Friend suggestions:" + found_user.invitations)
+	accepted = request.form["confirm"]
+	found_user.friends = accepted
+	db.session.add(found_user)
+	db.session.commit()
+	return render_template("invitations.html")
 
 
-@app.route('/delete')
+@app.route('/delete', methods = ["POST", "GET"])
 def delete():
-	pass
+	if "user" in session:
+		found_user = users.query.filter_by(name = session["user"]).first()
+		print(found_user)
+		db.session.delete(found_user)
+		db.session.commit()
+		session.pop("user", None)
+		session.pop("email", None)
+		session.pop("language", None)
+		session.pop("password", None)
+	else:
+		flash("You are not logged in!")
+		
+	return render_template("profile.html")
 
 
 if __name__ == "__main__":
