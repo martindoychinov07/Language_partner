@@ -4,7 +4,7 @@ export default function Hompage(){
     return(
  <div className="w-screen bg-blue-600">
   {/* */}
-            <div className="navbar">
+            <div className="navbar sticky top-0 bg-purple-50 text-black font-adelia">
   <div className="flex-1">
     <a className="btn btn-ghost normal-case text-xl font-adelia">Name </a>
   </div>
@@ -57,7 +57,7 @@ export default function Hompage(){
       <p className="text-[#262c30] m-3">Say goodbye to outdated phrases and hello to skills that take you places. Learn language for every day with regularly updated content, video flashcards with real people and helpful cultural insights. </p>
       </div>
       </div> 
-   <img src = "https://www.busuu.com/user/pages/home/_02-how-it-works-revamp/homepage-learn-together-dt-2x.png" className="w-[40vw]"/>
+   <img src = "https://www.busuu.com/user/pages/home/_02-how-it-works-revamp/homepage-learn-real-life-dt-2x.png" className="w-[40vw]"/>
     </div>
   </div>
 </div>
