@@ -2,8 +2,8 @@ from flask import Flask, render_template, url_for, redirect, request, session, f
 from datetime import timedelta
 from flask_sqlalchemy import SQLAlchemy
 import hashlib
-from backend.email_verification import *
-from backend.notification import *
+from email_verification import *
+from notification import *
 
 
 app = Flask(__name__)
