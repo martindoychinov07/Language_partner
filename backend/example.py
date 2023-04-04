@@ -1,4 +1,5 @@
 from flask import Flask,request, session, jsonify
+from flask_cors import CORS
 from datetime import timedelta
 from flask_sqlalchemy import SQLAlchemy
 import hashlib
@@ -8,6 +9,7 @@ from notification import *
 
 
 app = Flask(__name__)
+CORS(app)
 app.secret_key = "Python"
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.sqlite3'
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
