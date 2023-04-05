@@ -1,11 +1,20 @@
 import React from "react";
 import "./App.css";
+import axios from "axios"
 export default function Signup() {
-    function handleSubmit(event) {
+    async function handleSubmit(event) {
         event.preventDefault();
         const displayName = event.target[0].value;
     const email = event.target[1].value;
     const password = event.target[2].value;
+    const axios_response = await axios.post("http://127.0.0.1:5000",{
+      name:displayName,
+      email:email,
+      password:password,
+      kn_language:"hi",
+      w_language:"non hi"
+    })
+    console.log(axios_response)
     console.log(displayName,email, password);
     }
   return (

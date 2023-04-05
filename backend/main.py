@@ -5,9 +5,10 @@ import hashlib
 import datetime
 from email_verification import *
 from notification import *
-
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 app.secret_key = "Python"
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.sqlite3'
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
@@ -350,5 +351,6 @@ def chat_func():
 
 
 if __name__ == "__main__":
-	db.create_all()
-	app.run(debug = True)
+    with app.app_context():   
+        db.create_all()
+        app.run(debug = True)

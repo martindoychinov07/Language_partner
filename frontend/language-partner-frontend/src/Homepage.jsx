@@ -1,18 +1,20 @@
 import React from "react";
 import "./App.css";
+import { Link } from "react-router-dom"
+
 export default function Hompage(){
     return(
  <div className="w-screen bg-blue-600">
   {/* */}
             <div className="navbar sticky top-0 bg-purple-50 text-black font-adelia">
   <div className="flex-1">
-    <a className="btn btn-ghost normal-case text-xl font-adelia">Name </a>
+    <a className="btn btn-ghost normal-case text-xl font-adelia">Language Partner</a>
   </div>
   <div className="flex-none">
     <ul className="menu menu-horizontal px-1">
       <li><a>How it works</a></li>
-      <li><a>Get started</a></li>
-      <li><a>Log in</a></li>
+      <Link to = "/signup"><li><a>Get started</a></li></Link>
+      <Link to = "/login"><li><a>Log in</a></li></Link>;
     </ul>
   </div>
 </div>
@@ -22,21 +24,12 @@ export default function Hompage(){
     <div className="flex-1 font-adelia">
         <h1 className="text-white text-5xl p-8">New language, new opportunities, new you</h1>
         <p className="text-white p-8">Get access to compact lessons from the experts and connect with a community of native speakers to help you master words faster</p>
-        <button className="btn bg-[#11ee92] text-black hover:bg-green-300 px-8 mx-8">Get Started</button>
+        <Link to = "/signup"><button className="btn bg-[#11ee92] text-black hover:bg-green-300 px-8 mx-8">Get Started</button></Link>
     </div>
   </div>
 {/*end of main */}
-  <div className="carousel">
-  <div className="carousel-item">
-    <div>
-    <img src="/images/stock/photo-1559703248-dcaaec9fab78.jpg"  />
-    <p className="">English</p>
-    </div>
-  </div> 
-  </div>
-  {/*end of carousel */}
   <div className="bg-white">
-    <p className="text-center font-adelia text-6xl text-black ">Why learn a language with Name</p>
+    <p className="text-center font-adelia text-6xl text-black ">Why learn a language with Language Partner</p>
     <div className="flex p-3">
     <img src = "https://www.busuu.com/user/pages/home/_02-how-it-works-revamp/homepage-learn-together-dt-2x.png" className="w-[40vw]"/>
     <div className="text-center font-adelia w-screen ">

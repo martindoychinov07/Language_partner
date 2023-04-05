@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import "./App.css";
+import { Link } from "react-router-dom"
 
 export default function Chat() {
   const [messages, setMessages] = useState([]);
@@ -22,15 +23,15 @@ export default function Chat() {
     <div className='w-screen h-screen'>
       <div className='flex-initial navbar bg-purple-50 text-black font-adelia justify-between'>
       <ul className="menu menu-horizontal px-1">
-        <li>
-          <button>
+      <Link to = "/"><li>
+        <button>
             <img src='https://upload.wikimedia.org/wikipedia/commons/3/34/Home-icon.svg' className='w-10 h-10'></img>
           </button>
-        </li>
+        </li></Link>
       </ul>
         <ul className="menu menu-horizontal px-1">
-          <li><a>Sign up</a></li> 
-          <li><a>Log in</a></li>
+        <Link to = "/signup"><li><a>Sign up</a></li></Link>
+        <Link to = "/login"><li><a>Log in</a></li></Link>
       </ul>
       </div>
       {/* end of navbar */}

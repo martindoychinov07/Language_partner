@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-
+import { Link } from "react-router-dom"
 export default function Login(){
     function handleSubmit(event){
         event.preventDefault();
@@ -14,6 +14,10 @@ export default function Login(){
                     <input required type="password" placeholder="password"  className="input input-bordered input-info w-full max-w-xs my-3 bg-white"/>
                     <button className = "btn btn-outline btn-info m-auto">Login</button>
                 </form>
+                <div className="flex-initial">
+                <p className="text-center text-black font-black text-2xl">Don't have an account</p>
+                <Link to = "/signup"><p className="text-center text-blue-600 font-black text-2xl">Sign up</p></Link>
+                </div>
             </div>
         </div>
     )
