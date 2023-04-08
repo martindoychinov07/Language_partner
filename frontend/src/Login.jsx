@@ -5,12 +5,13 @@ import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 
 export default function Login(){
+    const navigate = useNavigate()
     async function handleSubmit(event){
         event.preventDefault();
         const displayName = event.target[0].value;
         const email = event.target[1].value;
         const password = event.target[2].value
-        navigate = useNavigate()
+        
         try {
             const axios_response = await axios.post("http://localhost:5000/api/login",{
                 name:displayName,
