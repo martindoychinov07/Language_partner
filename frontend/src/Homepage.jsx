@@ -29,14 +29,11 @@ export default function Hompage(){
   </div>
 {/*end of main */}
   <div className="bg-white">
-    <p className="text-center font-adelia text-6xl text-black ">Why learn a language with Language Partner</p>
+    <p className="text-center font-adelia text-6xl text-black ">Practise the language of your choice with Language Partner</p>
     <div className="flex p-3">
-    <img src = "https://www.busuu.com/user/pages/home/_02-how-it-works-revamp/homepage-learn-together-dt-2x.png" className="w-[40vw]"/>
     <div className="text-center font-adelia w-screen ">
       <div className="pt-8">
-      <p className="text-[#6c7483] m-3">AN INTERACTIVE COMMUNITY</p>
-      <p className="text-[#252b2f] m-3">Learn more together</p>
-      <p className="text-[#262c30] m-3">Go beyond the textbook. Practise pronunciation, gain cultural insights and exchange local language tips with our global community of learners. </p>
+      <p className="text-[#262c30] m-3">Language Partner is a free app that allows you to practice oral communication in a foreign language with a native speaker partner of your choice. </p>
       </div>
       </div>  
     </div>
@@ -45,12 +42,9 @@ export default function Hompage(){
     
     <div className="text-center font-adelia w-screen ">
       <div className="pt-8">
-      <p className="text-[#6c7483] m-3">LESSONS FEATURING REAL PEOPLE</p>
-      <p className="text-[#252b2f] m-3">Learn for real life</p>
-      <p className="text-[#262c30] m-3">Say goodbye to outdated phrases and hello to skills that take you places. Learn language for every day with regularly updated content, video flashcards with real people and helpful cultural insights. </p>
+      <p className="text-[#262c30] m-3">If you have difficulty communicating in a foreign language, Language Partner is the place to practice and improve by practicing the language every day. With Language Partner, you can meet people from all over the world, communicate in any language you choose, build on and improve your knowledge and skills. With Language Partner, passive knowledge of the target language becomes active and you have the opportunity to practise vocabulary in your area of interest. Language Partner helps you build confidence and self-esteem, which are particularly important in oral communication. With Language Partner, you overcome the boundaries and anxieties you experience during your meetings with business partners and employees when they take place in a foreign language.</p>
       </div>
       </div> 
-   <img src = "https://www.busuu.com/user/pages/home/_02-how-it-works-revamp/homepage-learn-real-life-dt-2x.png" className="w-[40vw]"/>
     </div>
   </div>
 </div>

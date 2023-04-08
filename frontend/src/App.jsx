@@ -6,12 +6,14 @@ import Homepage from './Homepage';
 import Signup from './Signup';
 import Login from './Login';
 import Chat from './Chat';
+import Hompage_li from './Homepage_li';
 
 export default function App(){
 return (<Router>
       <Routes>
         <Route exact path="/login" Component={Login} />
         <Route path="/" Component={Homepage} />
+        <Route path="/homepage_li" Component={Hompage_li} />
         <Route path="/chat" Component={Chat} />
         <Route path="/signup" Component={Signup} />
       </Routes>

@@ -37,12 +37,17 @@ export default function Chat() {
       {/* end of navbar */}
       {/* list of chats */}
       <div className=' bg-purple-50 text-black font-adelia w-60 h-[87vh] mb-[0px] mr-[0px]'>
-        <h1 className='ml-5'>Chats:</h1>
-        <h1 className='ml-5 mt-1'>Paco</h1>
+      <ul className="menu menu-vertical px-1 font-adelia">
+        <li className='ml-5 w-[60px]'><a>Chats:</a></li>
+        <li className='ml-5 w-[60px]'><a>Alex</a></li>
+        <li className='ml-5 w-[60px]'><a>John</a></li>
+        <li className='ml-5 w-[60px]'><a>Kim</a></li>
+        <li className='ml-5 w-[60px]'><a>Natasha</a></li>
+      </ul>
       </div>
       {/* end of list of chats */}
       {/* send messages */}
-      <ul className='absolute top-[100px] left-[900px]'>
+      <ul className='absolute top-[150px] left-[900px]'>
         {messages.map((message) => (
           <li key={message.id} className='chat-bubble w-[200px] mb-1'>{message.text}</li>
         ))}
@@ -56,11 +61,9 @@ export default function Chat() {
       </li>
       </ul>
       {/* end of send messages */}
-      {/* <ul className='absolute top-[100px] left-[900px]'>
-        {messages.map((message) => (
-          <li className='chat-bubble w-[100px] mb-1'>{data.message_recieved}</li>
-        ))}
-      </ul>  */}
+      <ul className='absolute top-[100px] left-[350px]'>
+          <li className='chat-bubble w-[170px] mb-1 mr-[500px]'>Hello, how are you!</li>
+      </ul> 
     </div>
   );
 }
