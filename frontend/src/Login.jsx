@@ -19,7 +19,7 @@ export default function Login(){
                 password:password
             })
             console.log(axios_response)
-            navigate('/about');
+            navigate('/Homepage_li');
         }catch(err){
             console.log(axios_response)
         }
