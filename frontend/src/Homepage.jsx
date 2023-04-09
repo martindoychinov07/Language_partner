@@ -14,7 +14,7 @@ export default function Hompage(){
     <ul className="menu menu-horizontal px-1">
       <li><a>How it works</a></li>
       <Link to = "/signup"><li><a>Get started</a></li></Link>
-      <Link to = "/login"><li><a>Log in</a></li></Link>;
+      <Link to = "/login"><li><a>Log in</a></li></Link>
     </ul>
   </div>
 </div>

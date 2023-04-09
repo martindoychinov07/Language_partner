@@ -8,7 +8,7 @@ export default function Hompage_li(){
   {/* */}
   <div className="navbar sticky top-0 bg-purple-50 text-black font-adelia">
     <div className="flex-1">
-        <a className="btn btn-ghost normal-case text-xl font-adelia">Ivo</a>
+        <a className="btn btn-ghost normal-case text-xl font-adelia">Ivailo</a>
     </div>
     <div className="flex-none">
         <ul className="menu menu-horizontal px-1">
