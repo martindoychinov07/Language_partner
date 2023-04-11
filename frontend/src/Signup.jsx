@@ -6,15 +6,17 @@ export default function Signup() {
     async function handleSubmit(event) {
         event.preventDefault();
         const displayName = event.target[0].value;
-    const email = event.target[1].value;
-    const password = event.target[2].value;
+        const email = event.target[1].value;
+        const password = event.target[2].value;
+        const known_language = event.target[3].value;
+        const wanted_language = event.target[4].value;
     try{
       const axios_response = await axios.post("http://localhost:5000/api/signup",{
       name:displayName,
       email:email,
       password:password,
-      known_language:"",
-      wanted_language:""
+      known_language:known_language,
+      wanted_language:wanted_language
     })
     console.log(axios_response)
     }catch(err){
