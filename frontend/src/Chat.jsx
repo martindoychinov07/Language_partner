@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState , useEffect} from 'react';
 import "./App.css";
 import { Link } from "react-router-dom";
-
+import axios from 'axios';
 export default function Chat() {
   const [messages, setMessages] = useState([]);
 
@@ -17,23 +17,26 @@ export default function Chat() {
     setMessages(newMessages);
     setNewMessage('');
   };
-
+  useEffect(() => {
+    const username = sessionStorage.getItem("username");
+    console.log(username)
+    async function axios_req(){
+    try{
+      const axios_rs = await axios.get('http://localhost:5000/api/chat',{
+      reciever:username
+    })
+    return axios_rs;
+  }catch(err){
+    console.log(err)
+    return err;
+}
+  }
+  const messages = axios_req()
+  console.log(messages)
+  })
   return (
     // Navbar
     <div className='w-screen h-screen'>
-      <div className='flex-initial navbar bg-purple-50 text-black font-adelia justify-between'>
-      <ul className="menu menu-horizontal px-1">
-      <Link to = "/"><li>
-        <button>
-            <img src='https://upload.wikimedia.org/wikipedia/commons/3/34/Home-icon.svg' className='w-10 h-10'></img>
-          </button>
-        </li></Link>
-      </ul>
-        <ul className="menu menu-horizontal px-1">
-        <Link to = "/signup"><li><a>Sign up</a></li></Link>
-        <Link to = "/login"><li><a>Log in</a></li></Link>
-      </ul>
-      </div>
       {/* end of navbar */}
       {/* list of chats */}
       <div className=' bg-purple-50 text-black font-adelia w-60 h-[87vh] mb-[0px] mr-[0px]'>

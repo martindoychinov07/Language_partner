@@ -1,8 +1,9 @@
 import React from "react";
 import "./App.css";
 import axios from "axios";
-
+import { useNavigate } from 'react-router-dom';
 export default function Signup() {
+  const navigate = useNavigate()
     async function handleSubmit(event) {
         event.preventDefault();
         const displayName = event.target[0].value;
@@ -19,6 +20,9 @@ export default function Signup() {
       wanted_language:wanted_language
     })
     console.log(axios_response)
+    sessionStorage.setItem("username", displayName);
+    console.log(displayName)
+    navigate("/chat")
     }catch(err){
       console.log(err)
     }

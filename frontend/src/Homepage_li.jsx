@@ -1,8 +1,9 @@
-import React from "react";
+import React,{useContext} from "react";
 import "./App.css";
 import { Link } from "react-router-dom";
-
+import { AuthContext } from "./AuthContext";
 export default function Hompage_li(){
+    const {isAuthenticated} = useContext(AuthContext)   
     return(
  <div className="w-screen">
   {/* */}
@@ -12,8 +13,8 @@ export default function Hompage_li(){
     </div>
     <div className="flex-none">
         <ul className="menu menu-horizontal px-1">
-        <li><a>Find Friends</a></li>
-        <Link to = "/chat"><li><a>Chats</a></li></Link>
+        <li>Find Friends</li>
+        <Link to = "/chat"><li>Chats</li></Link>
         </ul>
     </div>
   </div>

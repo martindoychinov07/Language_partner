@@ -5,6 +5,7 @@ import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 
 export default function Login(){
+    const [err,setErr] = React.useState("")
     const navigate = useNavigate()
     async function handleSubmit(event){
         event.preventDefault();
@@ -19,6 +20,11 @@ export default function Login(){
                 password:password
             })
             console.log(axios_response)
+            if(axios_response.data.type == "error"){
+                setErr("user doesnt exist");
+                return;
+            }
+            sessionStorage.setItem("username", username);
             navigate('/Homepage_li');
         }catch(err){
             console.log(axios_response)
@@ -33,6 +39,7 @@ export default function Login(){
                     <input required type="email" placeholder="email" className="input input-bordered input-info w-full max-w-xs my-3 bg-white"/>
                     <input required type="password" placeholder="password"  className="input input-bordered input-info w-full max-w-xs my-3 bg-white"/>
                     <button className = "btn btn-outline btn-info m-auto">Login</button>
+                    <p>{err}</p>
                 </form>
                 <div className="flex-initial">
                 <p className="text-center text-black font-black text-2xl">Don't have an account</p>
