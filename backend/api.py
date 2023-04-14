@@ -81,9 +81,9 @@ class friends(db.Model):
         self.date = date
 
 
-# @app.route('/')
-# def index():
-# 	return app.send_static_file('index.html')
+@app.route('/')
+def index():
+	return app.send_static_file('index.html')
 
 
 @app.route("/api/signup", methods=["POST"])
@@ -329,38 +329,41 @@ def delete():
     return jsonify(type="warning", message="account.deleted")
 
 
-@app.route("/api/chat", methods = ["GET", "POST"])
-def chat_func():
-	if request.method == "POST":
-		chat_data = request.json
-		sender = session["user"]
-		receiver = chat_data["receiver"]
-		message = chat_data["message"]
-		if sender == receiver:
-			return jsonify(type = "error", message = "user.cant.text.himself")
-		date = datetime.datetime.now()
-		msg = chat(sender, receiver, message, date, 0)
-		db.session.add(msg)
-		db.session.commit()
-		return jsonify(type = "warning", message = "message.delivered")
+@app.route("/api/chat/post", methods = ["POST"])
+def chat_post():
+    chat_data = request.json
+    sender = session["user"]
+    receiver = chat_data["receiver"]
+    message = chat_data["message"]
+    if sender == receiver:
+        return jsonify(type = "error", message = "user.cant.text.himself")
+    date = datetime.datetime.now()
+    msg = chat(sender, receiver, message, date, 0)
+    db.session.add(msg)
+    db.session.commit()
+    return jsonify(type = "warning", message = "message.delivered")
 	
-	if request.method == "GET":
-		wanted_data = request.json
-		wanted_receiver = session["user"]
-		messages = []
+@app.route("/api/chat/get", methods = ["GET"])
+@app.route("/api/chat/get/<username>", methods = ["GET"])
+def chat_get(username = "session"):
+    # wanted_data = request.json
+    if username == "session":
+        wanted_receiver = session["user"]
+    else:
+        wanted_receiver = username
+    messages = []
 
-		found_messages = chat.query.filter_by(receiver = wanted_receiver, status = 0).all()
+    found_messages = chat.query.filter_by(receiver = wanted_receiver, status = 0).all()
 
-		for i in range(len(found_messages)):
-			if found_messages[i]:
-				found_messages[i].status = 1
-				db.session.add(found_messages[i])
-				db.session.commit()
-				messages.append({"message": found_messages[i].message, "sender": found_messages[i].sender, "time" : found_messages[i].date})
-		if found_messages == []:
-			return jsonify(type = "error", message = "no.messages.for.that.user")
-		return jsonify(messages)
-	return jsonify(type = "error", message = "no.messages.found")
+    for i in range(len(found_messages)):
+        if found_messages[i]:
+            found_messages[i].status = 1
+            db.session.add(found_messages[i])
+            db.session.commit()
+            messages.append({"message": found_messages[i].message, "sender": found_messages[i].sender, "time" : found_messages[i].date})
+    if found_messages == []:
+        return jsonify(type = "error", message = "no.messages.for.that.user")
+    return jsonify(messages)
 
 
 if __name__ == "__main__":
