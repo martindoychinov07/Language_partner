@@ -6,12 +6,26 @@ export default function Chat() {
   const [messages, setMessages] = useState([]);
 
   const [newMessage, setNewMessage] = useState('');
-
+  const [userChats,setUserChats] = useState([]);
   const handleInputChange = (event) => {
     setNewMessage(event.target.value);
   };
   
   const handleSendClick = () => {
+    async function axios_req(){
+     try{
+       const axios_response = await axios.post('http://localhost:5000/api/chat/post',{
+        sender:"Rado1",
+        receiver: "something",
+        message:newMessage
+    })
+    return axios_response;
+  }catch(err){
+    console.log(err);
+  }
+    }
+    const messages_data = axios_req();
+    console.log(messages_data);
     const newId = messages.length + 1;
     const newMessages = [...messages, { id: newId, text: newMessage }];
     setMessages(newMessages);
@@ -22,18 +36,22 @@ export default function Chat() {
     console.log(username)
     async function axios_req(){
     try{
-      const axios_rs = await axios.get('http://localhost:5000/api/chat',{
-      reciever:username
-    })
+      const axios_rs = await axios.get('http://localhost:5000/api/chat/get/' + username)
     return axios_rs;
   }catch(err){
     console.log(err)
     return err;
-}
+    }
   }
   const messages = axios_req()
   console.log(messages)
-  })
+  // setUserChats(() => {
+  //   return axios_response.map((chat) => {
+  //     return (
+  //       <li className='ml-5 w-[60px]'><a>{chat}</a></li>
+  //     )
+  // })
+   },[])
   return (
     // Navbar
     <div className='w-screen h-screen'>
@@ -41,6 +59,7 @@ export default function Chat() {
       {/* list of chats */}
       <div className=' bg-purple-50 text-black font-adelia w-60 h-[87vh] mb-[0px] mr-[0px]'>
       <ul className="menu menu-vertical px-1 font-adelia">
+        {userChats}
         <li className='ml-5 w-[60px]'><a>Chats:</a></li>
         <li className='ml-5 w-[60px]'><a>Alex</a></li>
         <li className='ml-5 w-[60px]'><a>John</a></li>
