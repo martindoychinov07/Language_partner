@@ -234,14 +234,13 @@ def profile():
 @app.route('/api/invite', methods=["POST"])
 def invite():
     if request.method == "POST":
-        found_user = users.query.filter_by(name=session["user"]).first()
+        found_user = users.query.filter_by(name = session["user"]).first()
         if found_user.status == 1:
             if "user" in session:
                 user_data = request.json
                 receiver = user_data["receiver"]
                 sender = session["user"]
-                found_invitation = invitations.query.filter_by(
-                    sender=sender).first()
+                found_invitation = invitations.query.filter_by(sender = sender).first()
                 if found_invitation:
                     return jsonify(type="error", message="invitation.already.sent")
                 if receiver == sender:
@@ -261,8 +260,8 @@ def invite():
             return jsonify(type="error", message="account.not.verified")
 
 
-@app.route("/api/invitation", methods=["GET", "POST"])
-def invitation():
+@app.route("/api/invitation/get", methods=["GET"])
+def invitation_get():
     if request.method == "GET":
         found_user = users.query.filter_by(name=session["user"]).first()
         if found_user.status == 1:
@@ -279,6 +278,8 @@ def invitation():
         else:
             return jsonify(type="error", message="account.not.verified")
 
+@app.route("/api/invitation/post", methods=["POST"])
+def invitation_post():
     if request.method == "POST":
         found_user = users.query.filter_by(name=session["user"]).first()
         if found_user.status == 1:
@@ -304,7 +305,6 @@ def invitation():
                 return jsonify(type="error", message="not.logged.in")
         else:
             return jsonify(type="error", message="account.not.verified")
-    return jsonify(type="error")
 
 
 @app.route('/api/delete', methods=["POST"])
@@ -330,9 +330,14 @@ def delete():
 
 
 @app.route("/api/chat/post", methods = ["POST"])
-def chat_post():
+@app.route("/api/chat/post/<username>", methods = ["POST"])
+def chat_post(username):
+    if username == "session":
+        sender = session["user"]
+    else:
+            sender = username
     chat_data = request.json
-    sender = session["user"]
+
     receiver = chat_data["receiver"]
     message = chat_data["message"]
     if sender == receiver:
