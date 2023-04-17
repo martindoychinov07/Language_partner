@@ -1,6 +1,6 @@
 # This Dockerfile builds the React client and API together
 #
-# docker build -f Dockerfile -t react-flask-app .
+# docker build --progress=plain --no-cache -f Dockerfile -t react-flask-app .
 #
 # docker run --rm -p 3000:3000 react-flask-app
 #
@@ -11,11 +11,18 @@ WORKDIR /app
 ENV PATH /app/node_modules/.bin:$PATH
 
 COPY ./frontend/package.json ./
+COPY ./frontend/postcss.config.cjs ./
+COPY ./frontend/tailwind.config.cjs ./
+COPY ./frontend/vite.config.js ./
 COPY ./frontend/index.html ./
 COPY ./frontend/src ./src
 COPY ./frontend/public ./public
 
 RUN npm install
+RUN npm install -D tailwindcss
+RUN npm install daisyui
+RUN npm install -D postcss-import
+RUN npm install -D autoprefixer
 RUN npm run build
 
 # Build step #2: build the API with the client as static files
